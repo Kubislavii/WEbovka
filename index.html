@@ -18,7 +18,7 @@
       --card-bg:       rgba(255, 255, 255, 0.04);
       --card-hover:    rgba(255, 255, 255, 0.07);
       --card-border:   rgba(255, 255, 255, 0.07);
-      --gap:           96px;
+      --gap:           72px;
     }
 
     html { scroll-behavior: smooth; }
@@ -65,10 +65,17 @@
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr 400px;
-      align-items: center;
-      gap: 48px;
+      grid-template-columns: 1fr 480px;
+      align-items: stretch;
+      gap: 40px;
       padding-top: 80px;
+      padding-bottom: 0;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding-bottom: 60px;
     }
 
@@ -97,16 +104,16 @@
     }
 
     .hero-statement {
-      font-size: 18px; line-height: 1.75;
+      font-size: 20px; line-height: 1.72;
       color: rgba(230, 238, 255, 0.82);
-      margin-bottom: 44px; max-width: 500px;
+      margin-bottom: 44px; max-width: 520px;
     }
 
-    .hero-contacts { display: flex; flex-direction: column; gap: 12px; }
+    .hero-contacts { display: flex; flex-direction: column; gap: 14px; }
 
     .hero-contact-row {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 14px; color: var(--text-muted);
+      display: flex; align-items: center; gap: 13px;
+      font-size: 16px; color: var(--text-muted);
     }
 
     .contact-icon {
@@ -122,7 +129,7 @@
 
     /* ── HERO PHOTO ── */
     .hero-photo-col {
-      position: relative; align-self: flex-end; height: 580px;
+      align-self: stretch; position: relative;
       display: flex; align-items: flex-end; justify-content: center;
     }
 
@@ -136,9 +143,10 @@
     }
 
     .hero-photo-col img {
-      max-height: 560px; max-width: 100%;
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      height: 95%; width: auto; max-width: 130%;
       object-fit: contain; object-position: bottom center;
-      display: block; position: relative; z-index: 1;
+      display: block; z-index: 1;
       mask-image: linear-gradient(to bottom, black 48%, transparent 94%);
       -webkit-mask-image: linear-gradient(to bottom, black 48%, transparent 94%);
       filter: brightness(0.96) contrast(1.04);
@@ -156,7 +164,7 @@
       font-weight: normal; color: #fff; letter-spacing: -0.015em;
     }
 
-    .s-header { margin-bottom: 56px; }
+    .s-header { margin-bottom: 44px; }
 
     /* ── DIVIDER ── */
     hr.divider {
@@ -170,7 +178,7 @@
       border: 1px solid var(--accent-border);
       background: var(--accent-dim);
       border-radius: 16px; padding: 46px 52px;
-      font-size: 19px; line-height: 1.8;
+      font-size: 20px; line-height: 1.8;
       color: rgba(230, 238, 255, 0.88);
       position: relative; overflow: hidden;
     }
@@ -191,7 +199,7 @@
       background: linear-gradient(to bottom, var(--accent-border) 0%, transparent 100%);
     }
 
-    .tl-item { position: relative; margin-bottom: 52px; }
+    .tl-item { position: relative; margin-bottom: 44px; }
     .tl-item:last-child { margin-bottom: 0; }
 
     .tl-item::before {
@@ -208,7 +216,7 @@
       font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
       letter-spacing: 0.06em; margin-bottom: 12px;
     }
-    .tl-desc   { font-size: 14px; color: var(--text-muted); line-height: 1.72; }
+    .tl-desc   { font-size: 16px; color: var(--text-muted); line-height: 1.72; }
 
     /* ── PROJECTS GRID ── */
     .proj-grid {
@@ -236,7 +244,7 @@
 
     .proj-name   { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 5px; line-height: 1.3; }
     .proj-client { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 14px; }
-    .proj-desc   { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+    .proj-desc   { font-size: 15px; color: var(--text-muted); line-height: 1.65; }
 
     /* ── SKILLS ── */
     .skills-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
@@ -322,12 +330,19 @@
       .edu-grid { grid-template-columns: 1fr; }
     }
 
+    @media (max-width: 768px) {
+      .hero-name { font-size: clamp(34px, 8vw, 56px); }
+      .s-title { font-size: clamp(22px, 5vw, 34px); }
+      .timeline { overflow-x: hidden; padding-left: 22px; }
+      .tl-item::before { left: -28px; }
+    }
+
     @media (max-width: 580px) {
       :root { --gap: 68px; }
       .container { padding: 0 22px; }
       hr.divider { padding: 0; }
       #lang-toggle { top: 16px; right: 22px; }
-      .looking-box { padding: 32px 26px; font-size: 17px; }
+      .looking-box { padding: 28px 22px; font-size: 17px; }
       .proj-grid { grid-template-columns: 1fr; }
       .btn-row { flex-direction: column; align-items: center; }
     }
@@ -367,6 +382,16 @@
           </svg>
         </span>
         <a href="mailto:Jakub.kodes@gmail.com">Jakub.kodes@gmail.com</a>
+      </div>
+      <div class="hero-contact-row">
+        <span class="contact-icon">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </span>
+        <a href="https://www.linkedin.com/in/jakubkodes" target="_blank" rel="noopener" data-key="job_li">LinkedIn profil</a>
       </div>
     </div>
   </div>
@@ -665,6 +690,8 @@ const t = {
     btn_email:    'Napsat e-mail',
     btn_linkedin: 'LinkedIn profil',
 
+    job_li: 'LinkedIn profil',
+
     footer: '© 2026 Jakub Kodeš, Ing.',
     toggle: 'EN',
   },
@@ -740,6 +767,8 @@ const t = {
     contact_closing: "Want to have a chat? I'd love to connect.",
     btn_email:    'Send an email',
     btn_linkedin: 'LinkedIn profile',
+
+    job_li: 'LinkedIn profile',
 
     footer: '© 2026 Jakub Kodeš, Ing.',
     toggle: 'CZ',
