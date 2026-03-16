@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jakub Kodeš – Project Manager | Marketing & Digital. 10+ let mezinárodních zkušeností.">
-  <title>Jakub Kodeš – Project Manager</title>
+  <meta name="description" content="Ing. Jakub Kodeš – Project Manager | Marketing & Digital. 10+ let mezinárodních zkušeností.">
+  <title>Ing. Jakub Kodeš – Project Manager</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ── LIGHT MODE (výchozí) ── */
     :root {
+      --accent:        #009e8e;
+      --accent-dim:    rgba(0, 158, 142, 0.10);
+      --accent-border: rgba(0, 158, 142, 0.30);
+      --text:          #1a202c;
+      --text-muted:    rgba(26, 32, 44, 0.68);
+      --text-subtle:   rgba(26, 32, 44, 0.42);
+      --card-bg:       rgba(0, 0, 0, 0.03);
+      --card-hover:    rgba(0, 0, 0, 0.055);
+      --card-border:   rgba(0, 0, 0, 0.09);
+      --bg-primary:    #f5f7fa;
+      --heading-color: #0d1117;
+      --divider-color: rgba(0, 0, 0, 0.09);
+      --btn-text:      #fff;
+      --gap:           72px;
+    }
+
+    /* ── DARK MODE ── */
+    [data-theme="dark"] {
       --accent:        #00d4b8;
       --accent-dim:    rgba(0, 212, 184, 0.09);
       --accent-border: rgba(0, 212, 184, 0.32);
@@ -18,23 +37,31 @@
       --card-bg:       rgba(255, 255, 255, 0.04);
       --card-hover:    rgba(255, 255, 255, 0.07);
       --card-border:   rgba(255, 255, 255, 0.07);
-      --gap:           72px;
+      --bg-primary:    #07091a;
+      --heading-color: #fff;
+      --divider-color: rgba(255, 255, 255, 0.07);
+      --btn-text:      #07091a;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
-      background-color: #07091a;
+      font-size: 18px;
+      background-color: var(--bg-primary);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    [data-theme="dark"] body {
       background-image:
         radial-gradient(ellipse 90% 70% at 15% 5%,  rgba(8, 25, 55, 0.95)  0%, transparent 65%),
         radial-gradient(ellipse 70% 80% at 85% 95%,  rgba(28, 8, 52, 0.90)  0%, transparent 65%),
         radial-gradient(ellipse 60% 50% at 50% 50%,  rgba(6, 18, 38, 0.60)  0%, transparent 100%);
       background-attachment: fixed;
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.65;
-      overflow-x: hidden;
     }
 
     a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
@@ -44,18 +71,22 @@
     .container { max-width: 1080px; margin: 0 auto; padding: 0 44px; }
     section { padding: var(--gap) 0; }
 
-    /* ── LANGUAGE TOGGLE ── */
-    #lang-toggle {
+    /* ── TOP CONTROLS ── */
+    .top-controls {
       position: fixed; top: 22px; right: 40px; z-index: 999;
-      background: rgba(255,255,255,0.06);
+      display: flex; gap: 10px; align-items: center;
+    }
+
+    .top-btn {
+      background: rgba(128,128,128,0.08);
       border: 1px solid var(--card-border);
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       color: var(--text); font-family: inherit;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-      padding: 9px 20px; border-radius: 40px; cursor: pointer;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.10em;
+      padding: 9px 18px; border-radius: 40px; cursor: pointer;
       transition: background 0.2s, border-color 0.2s, transform 0.15s;
     }
-    #lang-toggle:hover {
+    .top-btn:hover {
       background: var(--accent-dim);
       border-color: var(--accent-border);
       transform: translateY(-2px);
@@ -65,7 +96,7 @@
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr 480px;
+      grid-template-columns: 1fr 460px;
       align-items: stretch;
       gap: 40px;
       padding-top: 80px;
@@ -79,33 +110,33 @@
       padding-bottom: 60px;
     }
 
-    .hero-eyebrow {
-      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 22px; font-weight: 600;
-    }
-
     .hero-name {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(40px, 5.5vw, 68px);
-      font-weight: normal; letter-spacing: -0.025em; line-height: 1.05;
-      color: #fff; margin-bottom: 18px;
-    }
-
-    .hero-name em {
-      font-style: normal;
-      color: var(--accent);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: clamp(44px, 5.8vw, 76px);
+      font-weight: 800; letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.0;
+      color: var(--heading-color); margin-bottom: 20px;
     }
 
     .hero-title {
-      font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--text-muted); font-weight: 500;
       margin-bottom: 36px; padding-bottom: 36px;
       border-bottom: 1px solid var(--card-border);
+      line-height: 1.8;
+    }
+
+    .hero-location {
+      display: block;
+      font-size: 13px; letter-spacing: 0.14em;
+      color: var(--text-subtle); font-weight: 400;
+      text-transform: uppercase;
     }
 
     .hero-statement {
-      font-size: 20px; line-height: 1.72;
-      color: rgba(230, 238, 255, 0.82);
+      font-size: 21px; line-height: 1.72;
+      color: var(--text-muted);
       margin-bottom: 44px; max-width: 520px;
     }
 
@@ -113,11 +144,11 @@
 
     .hero-contact-row {
       display: flex; align-items: center; gap: 13px;
-      font-size: 16px; color: var(--text-muted);
+      font-size: 18px; color: var(--text-muted);
     }
 
     .contact-icon {
-      width: 34px; height: 34px; flex-shrink: 0;
+      width: 36px; height: 36px; flex-shrink: 0;
       border: 1px solid var(--accent-border);
       border-radius: 50%; background: var(--accent-dim);
       display: flex; align-items: center; justify-content: center;
@@ -129,39 +160,33 @@
 
     /* ── HERO PHOTO ── */
     .hero-photo-col {
-      align-self: stretch; position: relative;
-      display: flex; align-items: flex-end; justify-content: center;
-    }
-
-    .hero-photo-col::before {
-      content: '';
-      position: absolute; bottom: 8%; left: 50%;
-      transform: translateX(-50%);
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,212,184,0.07) 0%, transparent 70%);
-      border: 1px solid rgba(0,212,184,0.09);
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero-photo-col img {
-      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      height: 95%; width: auto; max-width: 130%;
-      object-fit: contain; object-position: bottom center;
-      display: block; z-index: 1;
-      mask-image: linear-gradient(to bottom, black 48%, transparent 94%);
-      -webkit-mask-image: linear-gradient(to bottom, black 48%, transparent 94%);
-      filter: brightness(0.96) contrast(1.04);
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 12%;
+      display: block;
+      border: 3px solid var(--accent-border);
+      box-shadow: 0 0 0 10px var(--accent-dim);
     }
 
     /* ── SECTION HEADER ── */
     .s-label {
-      font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
+      font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase;
       color: var(--accent); font-weight: 700; margin-bottom: 12px;
     }
 
     .s-title {
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: clamp(26px, 3.5vw, 40px);
-      font-weight: normal; color: #fff; letter-spacing: -0.015em;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: normal; color: var(--heading-color); letter-spacing: -0.015em;
     }
 
     .s-header { margin-bottom: 44px; }
@@ -169,7 +194,7 @@
     /* ── DIVIDER ── */
     hr.divider {
       border: none; height: 1px;
-      background: linear-gradient(to right, transparent, var(--card-border), transparent);
+      background: linear-gradient(to right, transparent, var(--divider-color), transparent);
       max-width: 1080px; margin: 0 auto; padding: 0 44px;
     }
 
@@ -179,7 +204,7 @@
       background: var(--accent-dim);
       border-radius: 16px; padding: 46px 52px;
       font-size: 20px; line-height: 1.8;
-      color: rgba(230, 238, 255, 0.88);
+      color: var(--text-muted);
       position: relative; overflow: hidden;
     }
 
@@ -187,11 +212,14 @@
       content: '"';
       position: absolute; top: -30px; left: 28px;
       font-size: 220px; font-family: Georgia, serif;
-      color: rgba(0,212,184,0.06);
+      color: rgba(0, 158, 142, 0.06);
       line-height: 1; pointer-events: none;
     }
+    [data-theme="dark"] .looking-box::before {
+      color: rgba(0, 212, 184, 0.06);
+    }
 
-    /* ── TIMELINE ── */
+    /* ── TIMELINE / ACCORDION ── */
     .timeline { position: relative; padding-left: 30px; }
 
     .timeline::before {
@@ -199,24 +227,95 @@
       background: linear-gradient(to bottom, var(--accent-border) 0%, transparent 100%);
     }
 
-    .tl-item { position: relative; margin-bottom: 44px; }
+    .tl-item { position: relative; margin-bottom: 10px; }
     .tl-item:last-child { margin-bottom: 0; }
 
     .tl-item::before {
-      content: ''; position: absolute; left: -36px; top: 6px;
+      content: ''; position: absolute; left: -36px; top: 20px;
       width: 12px; height: 12px; border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 5px rgba(0,212,184,0.12);
+      box-shadow: 0 0 0 5px var(--accent-dim);
     }
 
-    .tl-role   { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 3px; }
-    .tl-co     { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
-    .tl-dates  {
-      font-size: 12px; color: var(--text-subtle);
-      font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-      letter-spacing: 0.06em; margin-bottom: 12px;
+    /* Klikatelná hlavička pozice */
+    .tl-header {
+      cursor: pointer;
+      padding: 16px 18px;
+      border-radius: 12px;
+      transition: background 0.2s;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid transparent;
     }
-    .tl-desc   { font-size: 16px; color: var(--text-muted); line-height: 1.72; }
+    .tl-header:hover {
+      background: var(--card-bg);
+      border-color: var(--accent-border);
+    }
+    .tl-header.open {
+      background: var(--card-bg);
+      border-color: var(--accent-border);
+    }
+
+    .tl-header-main { flex: 1; }
+
+    .tl-role   { font-size: 19px; font-weight: 600; color: var(--heading-color); margin-bottom: 3px; }
+    .tl-co     { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
+    .tl-dates  {
+      font-size: 13px; color: var(--text-subtle);
+      font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+      letter-spacing: 0.06em; margin-bottom: 10px;
+    }
+    .tl-summary { font-size: 16px; color: var(--text-muted); line-height: 1.6; }
+    .tl-hint {
+      font-size: 12px; color: var(--accent); margin-top: 6px;
+      opacity: 0.65; letter-spacing: 0.04em;
+    }
+
+    /* Šipka */
+    .tl-chevron {
+      font-size: 22px; color: var(--accent); flex-shrink: 0;
+      margin-top: 2px;
+      transition: transform 0.3s ease;
+      user-select: none;
+      line-height: 1;
+    }
+    .tl-header.open .tl-chevron { transform: rotate(180deg); }
+
+    /* Rozbalovací obsah */
+    .tl-expand {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .tl-expand.open {
+      max-height: 700px;
+      opacity: 1;
+    }
+
+    .tl-details {
+      list-style: none;
+      padding: 8px 18px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .tl-details li {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      padding-left: 22px;
+      position: relative;
+    }
+    .tl-details li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-size: 12px;
+      top: 5px;
+    }
 
     /* ── PROJECTS GRID ── */
     .proj-grid {
@@ -228,7 +327,6 @@
       border-radius: 14px; padding: 28px 26px;
       transition: background 0.2s, border-color 0.2s, transform 0.25s;
     }
-
     .proj-card:hover {
       background: var(--card-hover);
       border-color: var(--accent-border);
@@ -236,25 +334,24 @@
     }
 
     .proj-num {
-      font-size: 10px; letter-spacing: 0.16em;
+      font-size: 11px; letter-spacing: 0.16em;
       color: var(--accent); font-weight: 700;
       font-family: 'SF Mono', Consolas, monospace;
       margin-bottom: 14px;
     }
-
-    .proj-name   { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 5px; line-height: 1.3; }
-    .proj-client { font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 14px; }
-    .proj-desc   { font-size: 15px; color: var(--text-muted); line-height: 1.65; }
+    .proj-name   { font-size: 17px; font-weight: 600; color: var(--heading-color); margin-bottom: 5px; line-height: 1.3; }
+    .proj-client { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 14px; }
+    .proj-desc   { font-size: 16px; color: var(--text-muted); line-height: 1.65; }
 
     /* ── SKILLS ── */
     .skills-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
     .skills-col-title {
-      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--accent); font-weight: 700; margin-bottom: 18px;
     }
     .pills { display: flex; flex-wrap: wrap; gap: 9px; }
     .pill {
-      padding: 7px 15px; border-radius: 40px; font-size: 13px; font-weight: 500;
+      padding: 8px 16px; border-radius: 40px; font-size: 15px; font-weight: 500;
       color: var(--text); background: var(--card-bg);
       border: 1px solid var(--accent-border);
       transition: background 0.18s;
@@ -267,10 +364,10 @@
       background: var(--card-bg); border: 1px solid var(--card-border);
       border-radius: 14px; padding: 28px;
     }
-    .edu-flag   { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
-    .edu-school { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 7px; }
-    .edu-degree { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
-    .edu-years  { font-size: 12px; color: var(--text-subtle); font-family: 'SF Mono', Consolas, monospace; letter-spacing: 0.05em; }
+    .edu-flag   { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+    .edu-school { font-size: 19px; font-weight: 600; color: var(--heading-color); margin-bottom: 7px; }
+    .edu-degree { font-size: 16px; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
+    .edu-years  { font-size: 13px; color: var(--text-subtle); font-family: 'SF Mono', Consolas, monospace; letter-spacing: 0.05em; }
 
     /* ── CONTACT ── */
     .contact-center {
@@ -278,37 +375,48 @@
     }
 
     .contact-closing {
-      font-size: 21px; font-style: italic;
-      color: rgba(230,238,255,0.75); margin-bottom: 48px;
+      font-size: 22px; font-style: italic;
+      color: var(--text-muted); margin-bottom: 48px;
     }
 
-    .btn-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+    .btn-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
 
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 34px; border-radius: 40px;
-      font-size: 14px; font-weight: 600; font-family: inherit;
+      padding: 15px 36px; border-radius: 40px;
+      font-size: 16px; font-weight: 600; font-family: inherit;
       cursor: pointer; text-decoration: none;
       transition: filter 0.2s, transform 0.2s, background 0.2s, border-color 0.2s;
     }
-
-    .btn-primary { background: var(--accent); color: #07091a; border: none; }
+    .btn-primary { background: var(--accent); color: var(--btn-text); border: none; }
     .btn-primary:hover { opacity: 1; filter: brightness(1.12); transform: translateY(-2px); }
-
     .btn-outline {
       background: transparent; color: var(--text);
       border: 1px solid var(--card-border);
     }
     .btn-outline:hover { opacity: 1; border-color: var(--accent-border); background: var(--accent-dim); transform: translateY(-2px); }
 
-    .contact-info { font-size: 14px; color: var(--text-muted); }
-    .contact-info a { color: var(--text-muted); }
-    .contact-info a:hover { color: var(--accent); opacity: 1; }
+    /* Velký kontakt dole */
+    .contact-info-large {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 28px;
+      font-size: 22px;
+    }
+    .contact-info-large a {
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .contact-info-large a:hover { color: var(--accent); opacity: 1; }
+    .contact-info-sep { color: var(--text-subtle); }
 
     /* ── FOOTER ── */
     footer {
       text-align: center; padding: 28px 44px;
-      font-size: 12px; color: var(--text-subtle);
+      font-size: 14px; color: var(--text-subtle);
       border-top: 1px solid var(--card-border);
     }
 
@@ -329,29 +437,32 @@
       .skills-wrap { grid-template-columns: 1fr; gap: 32px; }
       .edu-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 768px) {
-      .hero-name { font-size: clamp(34px, 8vw, 56px); }
-      .s-title { font-size: clamp(22px, 5vw, 34px); }
+      .hero-name { font-size: clamp(36px, 8vw, 56px); }
+      .s-title { font-size: clamp(24px, 5vw, 36px); }
       .timeline { overflow-x: hidden; padding-left: 22px; }
       .tl-item::before { left: -28px; }
+      .contact-info-large { font-size: 19px; }
     }
-
     @media (max-width: 580px) {
       :root { --gap: 68px; }
       .container { padding: 0 22px; }
       hr.divider { padding: 0; }
-      #lang-toggle { top: 16px; right: 22px; }
-      .looking-box { padding: 28px 22px; font-size: 17px; }
+      .top-controls { top: 16px; right: 16px; }
+      .looking-box { padding: 28px 22px; font-size: 18px; }
       .proj-grid { grid-template-columns: 1fr; }
       .btn-row { flex-direction: column; align-items: center; }
+      .contact-info-large { font-size: 17px; flex-direction: column; gap: 12px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Language toggle -->
-<button id="lang-toggle" onclick="toggleLang()">EN</button>
+<!-- Přepínače nahoře vpravo -->
+<div class="top-controls">
+  <button class="top-btn" id="theme-toggle" onclick="toggleTheme()">Tmavá</button>
+  <button class="top-btn" id="lang-toggle" onclick="toggleLang()">EN</button>
+</div>
 
 <!-- ════════════════════════════════════════
      HERO
@@ -359,16 +470,18 @@
 <section class="hero container">
 
   <div class="hero-content">
-    <p class="hero-eyebrow" data-key="hero_eyebrow">Projektový manažer · Brno, CZ</p>
-    <h1 class="hero-name">Jakub Kodeš,<br><em>Ing.</em></h1>
-    <p class="hero-title" data-key="hero_title">Project Manager | Marketing &amp; Digital</p>
+    <h1 class="hero-name">Jakub Kodeš</h1>
+    <p class="hero-title">
+      <span data-key="hero_title">Project Manager | Marketing &amp; Digital</span>
+      <span class="hero-location" data-key="hero_location">Brno, CZ</span>
+    </p>
     <p class="hero-statement" data-key="hero_statement">
-      Jsem projektový manažer s víc než 10 lety zkušeností – rád propojuju lidi, nápady a výsledky. Nebojím se přebrát rozjetý projekt ani rozjet nový od nuly.
+      Project Manager v Marketingu s více než 10 lety zkušeností z mezinárodního prostředí. Vynikám v end-to-end řízení projektů, stakeholder managementu a dodávce projektů šitých na míru klientům.
     </p>
     <div class="hero-contacts">
       <div class="hero-contact-row">
         <span class="contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.75h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.25A16 16 0 0 0 13.75 16.1l1.61-1.62a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
         </span>
@@ -376,7 +489,7 @@
       </div>
       <div class="hero-contact-row">
         <span class="contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
           </svg>
@@ -385,7 +498,7 @@
       </div>
       <div class="hero-contact-row">
         <span class="contact-icon">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
             <rect x="2" y="9" width="4" height="12"/>
             <circle cx="4" cy="4" r="2"/>
@@ -397,7 +510,7 @@
   </div>
 
   <div class="hero-photo-col">
-    <img src="./images/DSC_2377-removebg-preview.png" alt="Jakub Kodeš">
+    <img src="./Images/JaMaly.png" alt="Ing. Jakub Kodeš">
   </div>
 
 </section>
@@ -431,39 +544,109 @@
 
     <div class="timeline">
 
+      <!-- JOB 1 -->
       <div class="tl-item fade">
-        <p class="tl-role"  data-key="job1_role">Project Manager</p>
-        <p class="tl-co"    data-key="job1_co">Digitální agentura</p>
-        <p class="tl-dates" data-key="job1_dates">01/2026 – současnost</p>
-        <p class="tl-desc"  data-key="job1_desc">Převzetí běžícího front-end projektu s cílem dodat ho včas a v rámci rozpočtu. Denní koordinace s vývojáři (FE/BE), přímá komunikace s klientem, řízení rozsahu a rizik.</p>
+        <div class="tl-header" onclick="toggleJob(this)">
+          <div class="tl-header-main">
+            <p class="tl-role"  data-key="job1_role">Project Manager</p>
+            <p class="tl-co"    data-key="job1_co">Digitální agentura</p>
+            <p class="tl-dates" data-key="job1_dates">01/2026 – současnost</p>
+            <p class="tl-summary" data-key="job1_summary">Převzetí běžícího projektu ve fázi vývoje (front-end) s cílem dodat projekt včas a v rámci rozpočtu.</p>
+            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
+          </div>
+          <span class="tl-chevron">▾</span>
+        </div>
+        <div class="tl-expand">
+          <ul class="tl-details" data-key="job1_details">
+            <li>Zodpovědnost za rozsah, časový plán a kontrolu nákladů</li>
+            <li>Denní koordinace s vývojáři (FE/BE) a přímá komunikace s klientem</li>
+            <li>Identifikace rizik a operativní rozhodování pro zajištění dokončení projektu</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- JOB 2 -->
       <div class="tl-item fade d1">
-        <p class="tl-role"  data-key="job2_role">Marketing Project Manager</p>
-        <p class="tl-co">ACRIOS Systems</p>
-        <p class="tl-dates" data-key="job2_dates">01/2024 – 01/2025</p>
-        <p class="tl-desc"  data-key="job2_desc">Plná odpovědnost za marketingové aktivity – strategie, business development. Řízení redesignu webu a rebrandingu od briefingu až po spuštění. Koordinace externích specialistů.</p>
+        <div class="tl-header" onclick="toggleJob(this)">
+          <div class="tl-header-main">
+            <p class="tl-role"  data-key="job2_role">Marketing Project Manager</p>
+            <p class="tl-co">ACRIOS Systems s.r.o.</p>
+            <p class="tl-dates" data-key="job2_dates">01/2024 – 01/2025</p>
+            <p class="tl-summary" data-key="job2_summary">Plná odpovědnost za marketingové aktivity – strategie, business development.</p>
+            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
+          </div>
+          <span class="tl-chevron">▾</span>
+        </div>
+        <div class="tl-expand">
+          <ul class="tl-details" data-key="job2_details">
+            <li>Řízení redesignu webu a rebrandingu od briefingu až po spuštění</li>
+            <li>Nastavení marketingových aktivit podporujících prodej</li>
+            <li>Koordinace externích specialistů a kontrola harmonogramů a rozpočtů</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- JOB 3 -->
       <div class="tl-item fade d2">
-        <p class="tl-role" data-key="job3_role">Project &amp; Brand Manager</p>
-        <p class="tl-co">Purple Technology s.r.o.</p>
-        <p class="tl-dates">2019 – 2023</p>
-        <p class="tl-desc" data-key="job3_desc">Řízení interního marketingového týmu, koordinace napříč UX/UI, obsahem a výkonem. Dodávka projektů na mezinárodních trzích (JP, NG, GCC, TH). Spolupráce s prodejními týmy a stakeholdery.</p>
+        <div class="tl-header" onclick="toggleJob(this)">
+          <div class="tl-header-main">
+            <p class="tl-role" data-key="job3_role">Project &amp; Brand Manager</p>
+            <p class="tl-co">Purple Technology s.r.o.</p>
+            <p class="tl-dates">2019 – 2023</p>
+            <p class="tl-summary" data-key="job3_summary">Řízení interního marketingového týmu a koordinace napříč UX/UI, obsahem a výkonem.</p>
+            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
+          </div>
+          <span class="tl-chevron">▾</span>
+        </div>
+        <div class="tl-expand">
+          <ul class="tl-details" data-key="job3_details">
+            <li>Identifikace a analýza potřeb klientů a trhu</li>
+            <li>Dodávka webových a marketingových projektů přizpůsobených konkrétním požadavkům trhu a klientů</li>
+            <li>Úzká spolupráce s prodejními týmy a interními stakeholdery pro sladění výstupů projektů s obchodními cíli</li>
+            <li>Plánování a prioritizace více projektů na mezinárodních trzích (JP, NG, GCC, TH)</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- JOB 4 -->
       <div class="tl-item fade d3">
-        <p class="tl-role" data-key="job4_role">Sales &amp; Marketing Specialist</p>
-        <p class="tl-co">Reklama Kubíček</p>
-        <p class="tl-dates">2017 – 2019</p>
-        <p class="tl-desc" data-key="job4_desc">Business development a account management. Vytvoření nové značky, webu a komunikačního stylu. Implementace CRM a řízení online marketingu.</p>
+        <div class="tl-header" onclick="toggleJob(this)">
+          <div class="tl-header-main">
+            <p class="tl-role" data-key="job4_role">Sales &amp; Marketing Specialist</p>
+            <p class="tl-co">Reklama Kubíček s.r.o.</p>
+            <p class="tl-dates">2017 – 2019</p>
+            <p class="tl-summary" data-key="job4_summary">Business development a základní account management včetně komunikace s klienty a partnery.</p>
+            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
+          </div>
+          <span class="tl-chevron">▾</span>
+        </div>
+        <div class="tl-expand">
+          <ul class="tl-details" data-key="job4_details">
+            <li>Identifikace nových obchodních a marketingových příležitostí</li>
+            <li>Vytvoření nové značky, webu a komunikačního stylu</li>
+            <li>Implementace CRM, plánování marketingového rozpočtu a řízení online marketingu</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- JOB 5 -->
       <div class="tl-item fade d4">
-        <p class="tl-role" data-key="job5_role">Marketing Specialist</p>
-        <p class="tl-co">Zetor Tractors a.s.</p>
-        <p class="tl-dates">2012 – 2016</p>
-        <p class="tl-desc" data-key="job5_desc">Podpora distributorské a dealerské sítě. Spolupráce na mezinárodních webech a online komunikaci. Organizace akcí a koordinace marketingových materiálů.</p>
+        <div class="tl-header" onclick="toggleJob(this)">
+          <div class="tl-header-main">
+            <p class="tl-role" data-key="job5_role">Marketing Specialist</p>
+            <p class="tl-co">Zetor Tractors a.s.</p>
+            <p class="tl-dates">2012 – 2016</p>
+            <p class="tl-summary" data-key="job5_summary">Podpora distributorské a dealerské sítě a pravidelná komunikace s partnery.</p>
+            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
+          </div>
+          <span class="tl-chevron">▾</span>
+        </div>
+        <div class="tl-expand">
+          <ul class="tl-details" data-key="job5_details">
+            <li>Spolupráce na mezinárodních webech a online komunikaci</li>
+            <li>Organizace akcí a koordinace marketingových materiálů</li>
+          </ul>
+        </div>
       </div>
 
     </div>
@@ -482,42 +665,36 @@
     </div>
 
     <div class="proj-grid">
-
       <div class="proj-card fade">
         <p class="proj-num">01</p>
         <p class="proj-name">Zetor.cz</p>
         <p class="proj-client">Zetor Tractors</p>
         <p class="proj-desc" data-key="proj1_desc">Webové stránky pro jednoho z nejznámějších českých výrobců traktorů.</p>
       </div>
-
       <div class="proj-card fade d1">
         <p class="proj-num">02</p>
         <p class="proj-name" data-key="proj2_name">Brand manuál, web &amp; strategie</p>
-        <p class="proj-client">Reklama Kubíček</p>
+        <p class="proj-client">Reklama Kubíček s.r.o.</p>
         <p class="proj-desc" data-key="proj2_desc">Kompletní budování značky od nuly – brand manuál, nový web a firemní strategie.</p>
       </div>
-
       <div class="proj-card fade d2">
         <p class="proj-num">03</p>
         <p class="proj-name">Axiory.com</p>
         <p class="proj-client">Purple Technology</p>
         <p class="proj-desc" data-key="proj3_desc">Rebrand a přizpůsobení webu novým trhům pro mezinárodního finančního brokera.</p>
       </div>
-
       <div class="proj-card fade d3">
         <p class="proj-num">04</p>
         <p class="proj-name">Fintokei</p>
         <p class="proj-client">Purple Technology</p>
         <p class="proj-desc" data-key="proj4_desc">Spuštění nového fintech brandu na japonském trhu – od brand identity po lokalizaci.</p>
       </div>
-
       <div class="proj-card fade d4">
         <p class="proj-num">05</p>
         <p class="proj-name" data-key="proj5_name">ACRIOS Systems – Branding &amp; Web</p>
-        <p class="proj-client">ACRIOS Systems</p>
+        <p class="proj-client">ACRIOS Systems s.r.o.</p>
         <p class="proj-desc" data-key="proj5_desc">Nový branding a webové stránky pro technologickou firmu z oblasti IoT a M2M komunikace.</p>
       </div>
-
     </div>
   </div>
 </section>
@@ -594,23 +771,23 @@
   <div class="container">
     <div class="s-header fade" style="text-align:center; margin-bottom:18px;">
       <p class="s-label" data-key="contact_label">Kontakt</p>
-      <h2 class="s-title" data-key="contact_title">Pojďme si popovídat</h2>
+      <h2 class="s-title" data-key="contact_title">Zajímá vás více?</h2>
     </div>
-    <p class="contact-closing fade d1" data-key="contact_closing">Chcete si popovídat? Rád se ozvu.</p>
+    <p class="contact-closing fade d1" data-key="contact_closing">Neváhejte se ozvat – rád se setkám nebo popovídám.</p>
     <div class="btn-row fade d2">
       <a href="mailto:Jakub.kodes@gmail.com" class="btn btn-primary" data-key="btn_email">Napsat e-mail</a>
       <a href="https://www.linkedin.com/in/jakubkodes" class="btn btn-outline" target="_blank" rel="noopener" data-key="btn_linkedin">LinkedIn profil</a>
     </div>
-    <p class="contact-info fade d3">
+    <div class="contact-info-large fade d3">
       <a href="tel:+420732819662">+420 732 819 662</a>
-      &nbsp;·&nbsp;
+      <span class="contact-info-sep">·</span>
       <a href="mailto:Jakub.kodes@gmail.com">Jakub.kodes@gmail.com</a>
-    </p>
+    </div>
   </div>
 </section>
 
 <footer>
-  <span data-key="footer">© 2026 Jakub Kodeš, Ing.</span>
+  <span data-key="footer">© 2026 Jakub Kodeš</span>
 </footer>
 
 <script>
@@ -619,9 +796,9 @@
 ═══════════════════════════════════════════════ */
 const t = {
   cs: {
-    hero_eyebrow:   'Projektový manažer · Brno, CZ',
     hero_title:     'Project Manager | Marketing &amp; Digital',
-    hero_statement: 'Jsem projektový manažer s víc než 10 lety zkušeností – rád propojuju lidi, nápady a výsledky. Nebojím se přebrát rozjetý projekt ani rozjet nový od nuly.',
+    hero_location:  'Brno, CZ',
+    hero_statement: 'Project Manager v Marketingu s více než 10 lety zkušeností z mezinárodního prostředí. Vynikám v end-to-end řízení projektů, stakeholder managementu a dodávce projektů šitých na míru klientům.',
 
     looking_label: 'Hledám',
     looking_title: 'Co hledám',
@@ -630,23 +807,30 @@ const t = {
     exp_label: 'Kariéra',
     exp_title: 'Pracovní zkušenosti',
 
-    job1_role:  'Project Manager',
-    job1_co:    'Digitální agentura',
-    job1_dates: '01/2026 – současnost',
-    job1_desc:  'Převzetí běžícího front-end projektu s cílem dodat ho včas a v rámci rozpočtu. Denní koordinace s vývojáři (FE/BE), přímá komunikace s klientem, řízení rozsahu a rizik.',
+    job1_role:    'Project Manager',
+    job1_co:      'Digitální agentura',
+    job1_dates:   '01/2026 – současnost',
+    job1_summary: 'Převzetí běžícího projektu ve fázi vývoje (front-end) s cílem dodat projekt včas a v rámci rozpočtu.',
+    job1_details: '<li>Zodpovědnost za rozsah, časový plán a kontrolu nákladů</li><li>Denní koordinace s vývojáři (FE/BE) a přímá komunikace s klientem</li><li>Identifikace rizik a operativní rozhodování pro zajištění dokončení projektu</li>',
 
-    job2_role:  'Marketing Project Manager',
-    job2_dates: '01/2024 – 01/2025',
-    job2_desc:  'Plná odpovědnost za marketingové aktivity – strategie, business development. Řízení redesignu webu a rebrandingu od briefingu až po spuštění. Koordinace externích specialistů.',
+    job2_role:    'Marketing Project Manager',
+    job2_dates:   '01/2024 – 01/2025',
+    job2_summary: 'Plná odpovědnost za marketingové aktivity – strategie, business development.',
+    job2_details: '<li>Řízení redesignu webu a rebrandingu od briefingu až po spuštění</li><li>Nastavení marketingových aktivit podporujících prodej</li><li>Koordinace externích specialistů a kontrola harmonogramů a rozpočtů</li>',
 
-    job3_role:  'Project &amp; Brand Manager',
-    job3_desc:  'Řízení interního marketingového týmu, koordinace napříč UX/UI, obsahem a výkonem. Dodávka projektů na mezinárodních trzích (JP, NG, GCC, TH). Spolupráce s prodejními týmy a stakeholdery.',
+    job3_role:    'Project &amp; Brand Manager',
+    job3_summary: 'Řízení interního marketingového týmu a koordinace napříč UX/UI, obsahem a výkonem.',
+    job3_details: '<li>Identifikace a analýza potřeb klientů a trhu</li><li>Dodávka webových a marketingových projektů přizpůsobených konkrétním požadavkům trhu a klientů</li><li>Úzká spolupráce s prodejními týmy a interními stakeholdery pro sladění výstupů projektů s obchodními cíli</li><li>Plánování a prioritizace více projektů na mezinárodních trzích (JP, NG, GCC, TH)</li>',
 
-    job4_role:  'Sales &amp; Marketing Specialist',
-    job4_desc:  'Business development a account management. Vytvoření nové značky, webu a komunikačního stylu. Implementace CRM a řízení online marketingu.',
+    job4_role:    'Sales &amp; Marketing Specialist',
+    job4_summary: 'Business development a základní account management včetně komunikace s klienty a partnery.',
+    job4_details: '<li>Identifikace nových obchodních a marketingových příležitostí</li><li>Vytvoření nové značky, webu a komunikačního stylu</li><li>Implementace CRM, plánování marketingového rozpočtu a řízení online marketingu</li>',
 
-    job5_role:  'Marketing Specialist',
-    job5_desc:  'Podpora distributorské a dealerské sítě. Spolupráce na mezinárodních webech a online komunikaci. Organizace akcí a koordinace marketingových materiálů.',
+    job5_role:    'Marketing Specialist',
+    job5_summary: 'Podpora distributorské a dealerské sítě a pravidelná komunikace s partnery.',
+    job5_details: '<li>Spolupráce na mezinárodních webech a online komunikaci</li><li>Organizace akcí a koordinace marketingových materiálů</li>',
+
+    hint_expand: 'Klikni pro detail ▾',
 
     proj_label: 'Projekty',
     proj_title: 'Vybrané projekty',
@@ -685,21 +869,22 @@ const t = {
     edu2_degree:  'Erasmus – Business &amp; Management',
 
     contact_label:   'Kontakt',
-    contact_title:   'Pojďme si popovídat',
-    contact_closing: 'Chcete si popovídat? Rád se ozvu.',
+    contact_title:   'Zajímá vás více?',
+    contact_closing: 'Neváhejte se ozvat – rád se setkám nebo popovídám.',
     btn_email:    'Napsat e-mail',
     btn_linkedin: 'LinkedIn profil',
+    job_li:       'LinkedIn profil',
 
-    job_li: 'LinkedIn profil',
-
-    footer: '© 2026 Jakub Kodeš, Ing.',
+    footer: '© 2026 Jakub Kodeš',
     toggle: 'EN',
+    theme_dark:  'Tmavá',
+    theme_light: 'Světlá',
   },
 
   en: {
-    hero_eyebrow:   'Project Manager · Brno, Czech Republic',
     hero_title:     'Project Manager | Marketing &amp; Digital',
-    hero_statement: "I'm a project manager with 10+ years of experience – I enjoy connecting people, ideas and outcomes. Happy to take over a running project or start fresh from scratch.",
+    hero_location:  'Brno, Czech Republic',
+    hero_statement: 'Marketing Project Manager with 10+ years of international experience, focused on client needs, stakeholder communication, and end-to-end project delivery.',
 
     looking_label: 'Looking for',
     looking_title: "What I'm looking for",
@@ -708,23 +893,30 @@ const t = {
     exp_label: 'Career',
     exp_title: 'Work Experience',
 
-    job1_role:  'Project Manager',
-    job1_co:    'Digital Agency',
-    job1_dates: '01/2026 – present',
-    job1_desc:  'Took over a running front-end project with the goal of delivering on time and within budget. Daily coordination with FE/BE developers, direct client communication, scope and risk management.',
+    job1_role:    'Project Manager',
+    job1_co:      'Digital Agency',
+    job1_dates:   '01/2026 – present',
+    job1_summary: 'Took over an ongoing project in the development phase (front-end) to deliver on time and within budget.',
+    job1_details: '<li>Responsible for scope, timeline, and cost control</li><li>Daily coordination with developers and direct communication with clients</li><li>Risk identification and operational decision-making to ensure successful project completion</li>',
 
-    job2_role:  'Marketing Project Manager',
-    job2_dates: '01/2024 – 01/2025',
-    job2_desc:  'Full ownership of marketing activities – strategy, business development. Managed web redesign and rebranding end-to-end. Coordinated external specialists, budgets and timelines.',
+    job2_role:    'Marketing Project Manager',
+    job2_dates:   '01/2024 – 01/2025',
+    job2_summary: 'Full ownership of marketing activities as a single-point marketing lead, using an external agency for execution.',
+    job2_details: '<li>Management of website redesign and rebranding from briefing to launch</li><li>Setup of marketing activities supporting sales enablement</li><li>Coordination of external specialists and control of timelines and budgets</li>',
 
-    job3_role:  'Project &amp; Brand Manager',
-    job3_desc:  'Led internal marketing team, coordinated across UX/UI, content and performance. Delivered projects on international markets (JP, NG, GCC, TH). Close collaboration with sales teams and stakeholders.',
+    job3_role:    'Project &amp; Brand Manager',
+    job3_summary: 'Management of an internal marketing team and coordination across UX/UI, content and design.',
+    job3_details: '<li>Identification and analysis of client and market needs</li><li>Delivery of web and marketing projects tailored to specific market</li><li>Close collaboration with sales teams and internal stakeholders to align project outputs with commercial goals</li><li>Planning of projects in international markets (JP, NG, GCC, TH)</li>',
 
-    job4_role:  'Sales &amp; Marketing Specialist',
-    job4_desc:  'Business development and account management. Built a new brand, website and communication style from scratch. Implemented CRM and managed online marketing.',
+    job4_role:    'Sales &amp; Marketing Specialist',
+    job4_summary: 'Business development and basic account management, including communication with clients and partners.',
+    job4_details: '<li>Identification of new business and marketing opportunities</li><li>Creation of a new brand, website, and communication style</li><li>CRM implementation, marketing budget planning, and online marketing</li>',
 
-    job5_role:  'Marketing Specialist',
-    job5_desc:  'Supported distributor and dealer network. Contributed to international websites and online communication. Organised events and coordinated marketing materials.',
+    job5_role:    'Marketing Specialist',
+    job5_summary: 'Support of global distributors and dealers and regular communication with partners worldwide.',
+    job5_details: '<li>Collaboration on international websites and online communication</li><li>Organization of events and coordination of marketing materials</li>',
+
+    hint_expand: 'Click for details ▾',
 
     proj_label: 'Projects',
     proj_title: 'Selected Projects',
@@ -763,20 +955,21 @@ const t = {
     edu2_degree:  'Erasmus – Business &amp; Management',
 
     contact_label:   'Contact',
-    contact_title:   "Let's connect",
-    contact_closing: "Want to have a chat? I'd love to connect.",
+    contact_title:   'Want to know more?',
+    contact_closing: "Don't hesitate to reach out – I'd love to connect.",
     btn_email:    'Send an email',
     btn_linkedin: 'LinkedIn profile',
+    job_li:       'LinkedIn profile',
 
-    job_li: 'LinkedIn profile',
-
-    footer: '© 2026 Jakub Kodeš, Ing.',
+    footer: '© 2026 Jakub Kodeš',
     toggle: 'CZ',
+    theme_dark:  'Dark',
+    theme_light: 'Light',
   }
 };
 
 /* ═══════════════════════════════════════════════
-   LANGUAGE LOGIC
+   LANGUAGE
 ═══════════════════════════════════════════════ */
 let lang = 'cs';
 
@@ -788,11 +981,46 @@ function applyLang(l) {
   });
   document.getElementById('lang-toggle').textContent = dict.toggle;
   document.documentElement.lang = l;
+  /* aktualizuj popisek přepínače tématu */
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.getElementById('theme-toggle').textContent = isDark ? dict.theme_light : dict.theme_dark;
 }
 
 function toggleLang() {
   lang = lang === 'cs' ? 'en' : 'cs';
   applyLang(lang);
+}
+
+/* ═══════════════════════════════════════════════
+   DARK / LIGHT MODE
+═══════════════════════════════════════════════ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  const newTheme = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  const dict = t[lang];
+  document.getElementById('theme-toggle').textContent = newTheme === 'dark' ? dict.theme_light : dict.theme_dark;
+}
+
+/* Obnovení uloženého tématu */
+(function () {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('theme-toggle').textContent = 'Světlá';
+  }
+})();
+
+/* ═══════════════════════════════════════════════
+   ACCORDION – pracovní zkušenosti
+═══════════════════════════════════════════════ */
+function toggleJob(header) {
+  const expand = header.nextElementSibling;
+  const isOpen = expand.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  expand.classList.toggle('open', !isOpen);
 }
 
 /* ═══════════════════════════════════════════════
@@ -804,7 +1032,6 @@ const io = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.fade').forEach(el => io.observe(el));
 
-/* Hero content visible immediately on load */
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.hero .fade').forEach(el => el.classList.add('vis'));
 });
