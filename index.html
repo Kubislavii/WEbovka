@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Ing. Jakub Kodeš – Project Manager | Marketing & Digital. 10+ let mezinárodních zkušeností.">
   <title>Ing. Jakub Kodeš – Project Manager</title>
+  <link rel="alternate" hreflang="cs" href="index.html">
+  <link rel="alternate" hreflang="en" href="index.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jakub Kodeš",
+    "honorificPrefix": "Ing.",
+    "jobTitle": "Project Manager",
+    "description": "Marketing Project Manager s 10+ lety mezinárodních zkušeností v end-to-end řízení projektů.",
+    "email": "Jakub.kodes@gmail.com",
+    "telephone": "+420732819662",
+    "url": "https://jakubkodes.cz",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Brno",
+      "addressCountry": "CZ"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/jakubkodes"
+    ],
+    "knowsAbout": ["Project Management", "Marketing", "Brand Management", "Stakeholder Management", "Agile"]
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -94,7 +118,6 @@
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 460px;
       align-items: stretch;
@@ -107,7 +130,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-bottom: 60px;
     }
 
     .hero-name {
@@ -161,20 +183,26 @@
     /* ── HERO PHOTO ── */
     .hero-photo-col {
       align-self: stretch;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
+      border-radius: 24px;
+      background: linear-gradient(160deg, rgba(0, 158, 142, 0.08) 0%, rgba(0, 158, 142, 0.28) 100%);
     }
 
     .hero-photo-col img {
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      object-position: center 12%;
+      object-position: center top;
       display: block;
-      border: 3px solid var(--accent-border);
-      box-shadow: 0 0 0 10px var(--accent-dim);
+      mix-blend-mode: multiply;
+    }
+
+    [data-theme="dark"] .hero-photo-col {
+      background: linear-gradient(160deg, rgba(0, 212, 184, 0.06) 0%, rgba(0, 212, 184, 0.20) 100%);
+    }
+
+    [data-theme="dark"] .hero-photo-col img {
+      mix-blend-mode: normal;
     }
 
     /* ── SECTION HEADER ── */
@@ -240,25 +268,40 @@
     /* Klikatelná hlavička pozice */
     .tl-header {
       cursor: pointer;
-      padding: 16px 18px;
+      padding: 16px 18px 12px;
       border-radius: 12px;
       transition: background 0.2s;
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
+      flex-direction: column;
       border: 1px solid transparent;
     }
-    .tl-header:hover {
+    .tl-header:hover,
+    .tl-header:focus-visible {
       background: var(--card-bg);
       border-color: var(--accent-border);
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
     .tl-header.open {
       background: var(--card-bg);
       border-color: var(--accent-border);
+      border-bottom-color: transparent;
+      border-radius: 12px 12px 0 0;
     }
-
-    .tl-header-main { flex: 1; }
+    /* Otevřená hlavička – žádný outline (jinak zvýrazní jen horní část boxu) */
+    .tl-header.open:hover {
+      outline: none;
+    }
+    /* Hover na celém otevřeném boxu – zvýraznit hlavičku i rozbalený obsah najednou */
+    .tl-item:hover .tl-header.open {
+      border-color: var(--accent);
+      border-bottom-color: transparent;
+    }
+    .tl-item:hover .tl-expand.open {
+      border-left-color: var(--accent);
+      border-right-color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
 
     .tl-role   { font-size: 19px; font-weight: 600; color: var(--heading-color); margin-bottom: 3px; }
     .tl-co     { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
@@ -268,20 +311,30 @@
       letter-spacing: 0.06em; margin-bottom: 10px;
     }
     .tl-summary { font-size: 16px; color: var(--text-muted); line-height: 1.6; }
-    .tl-hint {
-      font-size: 12px; color: var(--accent); margin-top: 6px;
-      opacity: 0.65; letter-spacing: 0.04em;
-    }
 
-    /* Šipka */
-    .tl-chevron {
-      font-size: 22px; color: var(--accent); flex-shrink: 0;
-      margin-top: 2px;
-      transition: transform 0.3s ease;
-      user-select: none;
-      line-height: 1;
+    /* Faded preview první věty detailu */
+    .tl-teaser {
+      font-size: 15px; color: var(--text-muted); line-height: 1.5;
+      margin-top: 10px; opacity: 0.35;
+      -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
     }
-    .tl-header.open .tl-chevron { transform: rotate(180deg); }
+    .tl-header.open .tl-teaser { display: none; }
+
+    /* Šipka – přesunuta pod obsah, vycentrovaná */
+    .tl-chevron-row {
+      display: flex;
+      justify-content: center;
+      padding-top: 12px;
+      color: var(--accent);
+      font-size: 18px;
+      user-select: none;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .tl-chevron-row:hover { transform: scale(1.9); }
+    .tl-header.open .tl-chevron-row { display: none; }
+    .tl-expand .tl-chevron-row { padding: 2px 0 14px; }
 
     /* Rozbalovací obsah */
     .tl-expand {
@@ -293,6 +346,11 @@
     .tl-expand.open {
       max-height: 700px;
       opacity: 1;
+      border-left: 1px solid var(--accent-border);
+      border-right: 1px solid var(--accent-border);
+      border-bottom: 1px solid var(--accent-border);
+      border-radius: 0 0 12px 12px;
+      background: linear-gradient(to bottom, var(--card-bg) 0%, transparent 85%);
     }
 
     .tl-details {
@@ -431,8 +489,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 920px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 110px; }
-      .hero-photo-col { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 180px; }
+      .hero-photo-col { height: 340px; border-radius: 16px; }
       .proj-grid { grid-template-columns: 1fr 1fr; }
       .skills-wrap { grid-template-columns: 1fr; gap: 32px; }
       .edu-grid { grid-template-columns: 1fr; }
@@ -460,8 +518,8 @@
 
 <!-- Přepínače nahoře vpravo -->
 <div class="top-controls">
-  <button class="top-btn" id="theme-toggle" onclick="toggleTheme()">Tmavá</button>
-  <button class="top-btn" id="lang-toggle" onclick="toggleLang()">EN</button>
+  <button class="top-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Přepnout barevné schéma">Tmavá</button>
+  <button class="top-btn" id="lang-toggle" onclick="toggleLang()" aria-label="Přepnout jazyk">EN</button>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -510,23 +568,22 @@
   </div>
 
   <div class="hero-photo-col">
-    <img src="./Images/JaMaly.png" alt="Ing. Jakub Kodeš">
+    <img src="./Images/ja_web.png" alt="Ing. Jakub Kodeš – Project Manager, Brno">
   </div>
 
 </section>
 
 <!-- ════════════════════════════════════════
-     WHAT I'M LOOKING FOR
+     HOW I WORK
 ════════════════════════════════════════ -->
-<hr class="divider">
 <section id="looking">
   <div class="container">
     <div class="s-header fade">
-      <p class="s-label" data-key="looking_label">Hledám</p>
-      <h2 class="s-title" data-key="looking_title">Co hledám</h2>
+      <p class="s-label" data-key="looking_label">Přístup</p>
+      <h2 class="s-title" data-key="looking_title">Jak pracuju</h2>
     </div>
     <div class="looking-box fade d1">
-      <p data-key="looking_text">Hledám roli Project Managera, kde budu moct naplno využít svoji kombinaci komunikačních dovedností, zkušeností z marketingu a řízení projektů. Baví mě prostředí, kde se věci opravdu dějí.</p>
+      <p data-key="looking_text">Nejlépe pracuji tam, kde se věci dějí přes lidi. Přirozeně vnímám, co kdo potřebuje, přizpůsobuju přístup každému a hledám cestu, která funguje pro všechny. Projekty dovedu od nápadu do cíle – a na té cestě mě baví hlavně ti, se kterými ji jdu.</p>
     </div>
   </div>
 </section>
@@ -547,35 +604,34 @@
       <!-- JOB 1 -->
       <div class="tl-item fade">
         <div class="tl-header" onclick="toggleJob(this)">
-          <div class="tl-header-main">
-            <p class="tl-role"  data-key="job1_role">Project Manager</p>
-            <p class="tl-co"    data-key="job1_co">Digitální agentura</p>
-            <p class="tl-dates" data-key="job1_dates">01/2026 – současnost</p>
-            <p class="tl-summary" data-key="job1_summary">Převzetí běžícího projektu ve fázi vývoje (front-end) s cílem dodat projekt včas a v rámci rozpočtu.</p>
-            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
-          </div>
-          <span class="tl-chevron">▾</span>
+          <p class="tl-role"  data-key="job1_role">Project Manager</p>
+          <p class="tl-co"    data-key="job1_co">Digitální agentura</p>
+          <p class="tl-dates" data-key="job1_dates">01/2026 – současnost</p>
+          <p class="tl-summary" data-key="job1_summary">Vedení několika projektů napříč vývojem – od plánování kapacit a ceremonií až po dodávku a komunikaci s klientem.</p>
+          <p class="tl-teaser" data-key="job1_teaser">Vedení a koordinace více projektů současně</p>
+          <div class="tl-chevron-row">▾</div>
         </div>
         <div class="tl-expand">
           <ul class="tl-details" data-key="job1_details">
-            <li>Zodpovědnost za rozsah, časový plán a kontrolu nákladů</li>
-            <li>Denní koordinace s vývojáři (FE/BE) a přímá komunikace s klientem</li>
-            <li>Identifikace rizik a operativní rozhodování pro zajištění dokončení projektu</li>
+            <li>Vedení a koordinace více projektů současně</li>
+            <li>Plánování kapacit vývojového týmu a prioritizace úkolů</li>
+            <li>Přímá komunikace s klienty a řízení očekávání</li>
+            <li>Vedení projektových ceremonií (stand-upy, retrospektivy, review)</li>
+            <li>Kontrola rozsahu, harmonogramu a nákladů</li>
           </ul>
+          <div class="tl-chevron-row" onclick="toggleJob(this.closest('.tl-item').querySelector('.tl-header'))">▴</div>
         </div>
       </div>
 
       <!-- JOB 2 -->
       <div class="tl-item fade d1">
         <div class="tl-header" onclick="toggleJob(this)">
-          <div class="tl-header-main">
-            <p class="tl-role"  data-key="job2_role">Marketing Project Manager</p>
-            <p class="tl-co">ACRIOS Systems s.r.o.</p>
-            <p class="tl-dates" data-key="job2_dates">01/2024 – 01/2025</p>
-            <p class="tl-summary" data-key="job2_summary">Plná odpovědnost za marketingové aktivity – strategie, business development.</p>
-            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
-          </div>
-          <span class="tl-chevron">▾</span>
+          <p class="tl-role"  data-key="job2_role">Marketing Project Manager</p>
+          <p class="tl-co">ACRIOS Systems s.r.o.</p>
+          <p class="tl-dates" data-key="job2_dates">01/2024 – 01/2025</p>
+          <p class="tl-summary" data-key="job2_summary">Plná odpovědnost za marketingové aktivity – strategie, business development.</p>
+          <p class="tl-teaser" data-key="job2_teaser">Řízení redesignu webu a rebrandingu od briefingu až po spuštění</p>
+          <div class="tl-chevron-row">▾</div>
         </div>
         <div class="tl-expand">
           <ul class="tl-details" data-key="job2_details">
@@ -583,20 +639,19 @@
             <li>Nastavení marketingových aktivit podporujících prodej</li>
             <li>Koordinace externích specialistů a kontrola harmonogramů a rozpočtů</li>
           </ul>
+          <div class="tl-chevron-row" onclick="toggleJob(this.closest('.tl-item').querySelector('.tl-header'))">▴</div>
         </div>
       </div>
 
       <!-- JOB 3 -->
       <div class="tl-item fade d2">
         <div class="tl-header" onclick="toggleJob(this)">
-          <div class="tl-header-main">
-            <p class="tl-role" data-key="job3_role">Project &amp; Brand Manager</p>
-            <p class="tl-co">Purple Technology s.r.o.</p>
-            <p class="tl-dates">2019 – 2023</p>
-            <p class="tl-summary" data-key="job3_summary">Řízení interního marketingového týmu a koordinace napříč UX/UI, obsahem a výkonem.</p>
-            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
-          </div>
-          <span class="tl-chevron">▾</span>
+          <p class="tl-role" data-key="job3_role">Project &amp; Brand Manager</p>
+          <p class="tl-co">Purple Technology s.r.o.</p>
+          <p class="tl-dates">2019 – 2023</p>
+          <p class="tl-summary" data-key="job3_summary">Řízení interního marketingového týmu a koordinace napříč UX/UI, obsahem a výkonem.</p>
+          <p class="tl-teaser" data-key="job3_teaser">Identifikace a analýza potřeb klientů a trhu</p>
+          <div class="tl-chevron-row">▾</div>
         </div>
         <div class="tl-expand">
           <ul class="tl-details" data-key="job3_details">
@@ -605,20 +660,19 @@
             <li>Úzká spolupráce s prodejními týmy a interními stakeholdery pro sladění výstupů projektů s obchodními cíli</li>
             <li>Plánování a prioritizace více projektů na mezinárodních trzích (JP, NG, GCC, TH)</li>
           </ul>
+          <div class="tl-chevron-row" onclick="toggleJob(this.closest('.tl-item').querySelector('.tl-header'))">▴</div>
         </div>
       </div>
 
       <!-- JOB 4 -->
       <div class="tl-item fade d3">
         <div class="tl-header" onclick="toggleJob(this)">
-          <div class="tl-header-main">
-            <p class="tl-role" data-key="job4_role">Sales &amp; Marketing Specialist</p>
-            <p class="tl-co">Reklama Kubíček s.r.o.</p>
-            <p class="tl-dates">2017 – 2019</p>
-            <p class="tl-summary" data-key="job4_summary">Business development a základní account management včetně komunikace s klienty a partnery.</p>
-            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
-          </div>
-          <span class="tl-chevron">▾</span>
+          <p class="tl-role" data-key="job4_role">Sales &amp; Marketing Specialist</p>
+          <p class="tl-co">Reklama Kubíček s.r.o.</p>
+          <p class="tl-dates">2017 – 2019</p>
+          <p class="tl-summary" data-key="job4_summary">Business development a základní account management včetně komunikace s klienty a partnery.</p>
+          <p class="tl-teaser" data-key="job4_teaser">Identifikace nových obchodních a marketingových příležitostí</p>
+          <div class="tl-chevron-row">▾</div>
         </div>
         <div class="tl-expand">
           <ul class="tl-details" data-key="job4_details">
@@ -626,26 +680,26 @@
             <li>Vytvoření nové značky, webu a komunikačního stylu</li>
             <li>Implementace CRM, plánování marketingového rozpočtu a řízení online marketingu</li>
           </ul>
+          <div class="tl-chevron-row" onclick="toggleJob(this.closest('.tl-item').querySelector('.tl-header'))">▴</div>
         </div>
       </div>
 
       <!-- JOB 5 -->
       <div class="tl-item fade d4">
         <div class="tl-header" onclick="toggleJob(this)">
-          <div class="tl-header-main">
-            <p class="tl-role" data-key="job5_role">Marketing Specialist</p>
-            <p class="tl-co">Zetor Tractors a.s.</p>
-            <p class="tl-dates">2012 – 2016</p>
-            <p class="tl-summary" data-key="job5_summary">Podpora distributorské a dealerské sítě a pravidelná komunikace s partnery.</p>
-            <p class="tl-hint" data-key="hint_expand">Klikni pro detail ▾</p>
-          </div>
-          <span class="tl-chevron">▾</span>
+          <p class="tl-role" data-key="job5_role">Marketing Specialist</p>
+          <p class="tl-co">Zetor Tractors a.s.</p>
+          <p class="tl-dates">2012 – 2016</p>
+          <p class="tl-summary" data-key="job5_summary">Podpora distributorské a dealerské sítě a pravidelná komunikace s partnery.</p>
+          <p class="tl-teaser" data-key="job5_teaser">Spolupráce na mezinárodních webech a online komunikaci</p>
+          <div class="tl-chevron-row">▾</div>
         </div>
         <div class="tl-expand">
           <ul class="tl-details" data-key="job5_details">
             <li>Spolupráce na mezinárodních webech a online komunikaci</li>
             <li>Organizace akcí a koordinace marketingových materiálů</li>
           </ul>
+          <div class="tl-chevron-row" onclick="toggleJob(this.closest('.tl-item').querySelector('.tl-header'))">▴</div>
         </div>
       </div>
 
@@ -800,9 +854,9 @@ const t = {
     hero_location:  'Brno, CZ',
     hero_statement: 'Project Manager v Marketingu s více než 10 lety zkušeností z mezinárodního prostředí. Vynikám v end-to-end řízení projektů, stakeholder managementu a dodávce projektů šitých na míru klientům.',
 
-    looking_label: 'Hledám',
-    looking_title: 'Co hledám',
-    looking_text:  'Hledám roli Project Managera, kde budu moct naplno využít svoji kombinaci komunikačních dovedností, zkušeností z marketingu a řízení projektů. Baví mě prostředí, kde se věci opravdu dějí.',
+    looking_label: 'Přístup',
+    looking_title: 'Jak pracuju',
+    looking_text:  'Nejlépe pracuji tam, kde se věci dějí přes lidi. Přirozeně vnímám, co kdo potřebuje, přizpůsobuju přístup každému a hledám cestu, která funguje pro všechny. Projekty dovedu od nápadu do cíle – a na té cestě mě baví hlavně ti, se kterými ji jdu.',
 
     exp_label: 'Kariéra',
     exp_title: 'Pracovní zkušenosti',
@@ -810,8 +864,8 @@ const t = {
     job1_role:    'Project Manager',
     job1_co:      'Digitální agentura',
     job1_dates:   '01/2026 – současnost',
-    job1_summary: 'Převzetí běžícího projektu ve fázi vývoje (front-end) s cílem dodat projekt včas a v rámci rozpočtu.',
-    job1_details: '<li>Zodpovědnost za rozsah, časový plán a kontrolu nákladů</li><li>Denní koordinace s vývojáři (FE/BE) a přímá komunikace s klientem</li><li>Identifikace rizik a operativní rozhodování pro zajištění dokončení projektu</li>',
+    job1_summary: 'Vedení několika projektů napříč vývojem – od plánování kapacit a ceremonií až po dodávku a komunikaci s klientem.',
+    job1_details: '<li>Vedení a koordinace více projektů současně</li><li>Plánování kapacit vývojového týmu a prioritizace úkolů</li><li>Přímá komunikace s klienty a řízení očekávání</li><li>Vedení projektových ceremonií (stand-upy, retrospektivy, review)</li><li>Kontrola rozsahu, harmonogramu a nákladů</li>',
 
     job2_role:    'Marketing Project Manager',
     job2_dates:   '01/2024 – 01/2025',
@@ -830,7 +884,11 @@ const t = {
     job5_summary: 'Podpora distributorské a dealerské sítě a pravidelná komunikace s partnery.',
     job5_details: '<li>Spolupráce na mezinárodních webech a online komunikaci</li><li>Organizace akcí a koordinace marketingových materiálů</li>',
 
-    hint_expand: 'Klikni pro detail ▾',
+    job1_teaser: 'Vedení a koordinace více projektů současně',
+    job2_teaser: 'Řízení redesignu webu a rebrandingu od briefingu až po spuštění',
+    job3_teaser: 'Identifikace a analýza potřeb klientů a trhu',
+    job4_teaser: 'Identifikace nových obchodních a marketingových příležitostí',
+    job5_teaser: 'Spolupráce na mezinárodních webech a online komunikaci',
 
     proj_label: 'Projekty',
     proj_title: 'Vybrané projekty',
@@ -886,9 +944,9 @@ const t = {
     hero_location:  'Brno, Czech Republic',
     hero_statement: 'Marketing Project Manager with 10+ years of international experience, focused on client needs, stakeholder communication, and end-to-end project delivery.',
 
-    looking_label: 'Looking for',
-    looking_title: "What I'm looking for",
-    looking_text:  "I'm looking for a Project Manager role where I can fully use my mix of communication skills, marketing know-how, and project delivery experience. I enjoy environments where things actually get done.",
+    looking_label: 'Approach',
+    looking_title: 'How I work',
+    looking_text:  "I work best where things happen through people. I naturally sense what each person needs, adapt my approach accordingly, and look for solutions that work for everyone. I take projects from idea to finish line – and what I enjoy most is the people I share that journey with.",
 
     exp_label: 'Career',
     exp_title: 'Work Experience',
@@ -896,8 +954,8 @@ const t = {
     job1_role:    'Project Manager',
     job1_co:      'Digital Agency',
     job1_dates:   '01/2026 – present',
-    job1_summary: 'Took over an ongoing project in the development phase (front-end) to deliver on time and within budget.',
-    job1_details: '<li>Responsible for scope, timeline, and cost control</li><li>Daily coordination with developers and direct communication with clients</li><li>Risk identification and operational decision-making to ensure successful project completion</li>',
+    job1_summary: 'Managing multiple projects across development — from capacity planning and ceremonies to delivery and client communication.',
+    job1_details: '<li>Leading and coordinating multiple projects simultaneously</li><li>Development team capacity planning and task prioritization</li><li>Direct client communication and expectation management</li><li>Facilitating project ceremonies (stand-ups, retrospectives, reviews)</li><li>Scope, timeline, and cost control</li>',
 
     job2_role:    'Marketing Project Manager',
     job2_dates:   '01/2024 – 01/2025',
@@ -916,7 +974,11 @@ const t = {
     job5_summary: 'Support of global distributors and dealers and regular communication with partners worldwide.',
     job5_details: '<li>Collaboration on international websites and online communication</li><li>Organization of events and coordination of marketing materials</li>',
 
-    hint_expand: 'Click for details ▾',
+    job1_teaser: 'Leading and coordinating multiple projects simultaneously',
+    job2_teaser: 'Management of website redesign and rebranding from briefing to launch',
+    job3_teaser: 'Identification and analysis of client and market needs',
+    job4_teaser: 'Identification of new business and marketing opportunities',
+    job5_teaser: 'Collaboration on international websites and online communication',
 
     proj_label: 'Projects',
     proj_title: 'Selected Projects',
@@ -973,11 +1035,26 @@ const t = {
 ═══════════════════════════════════════════════ */
 let lang = 'cs';
 
+/* Nahradí lomitelnou pomlčku nezlomitelnou (U+2011), aby se slova jako "end-to-end" nelámala uprostřed */
+function fixHyphens(root) {
+  const target = root || document.body;
+  const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT, null);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    const fixed = node.textContent.replace(/(\w)-(\w)/g, '$1\u2011$2');
+    if (fixed !== node.textContent) node.textContent = fixed;
+  });
+}
+
 function applyLang(l) {
   const dict = t[l];
   document.querySelectorAll('[data-key]').forEach(el => {
     const key = el.dataset.key;
-    if (dict[key] !== undefined) el.innerHTML = dict[key];
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
+      fixHyphens(el);
+    }
   });
   document.getElementById('lang-toggle').textContent = dict.toggle;
   document.documentElement.lang = l;
@@ -1034,6 +1111,7 @@ document.querySelectorAll('.fade').forEach(el => io.observe(el));
 
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.hero .fade').forEach(el => el.classList.add('vis'));
+  fixHyphens();
 });
 </script>
 </body>
